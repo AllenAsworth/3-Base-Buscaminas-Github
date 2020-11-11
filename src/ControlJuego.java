@@ -34,10 +34,25 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
-
 		//TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
+		int numeroMinas = 0;
 		
-		
+		puntuacion = 0;
+
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				tablero[i][j] = 0;
+			}
+		}
+
+		while (numeroMinas != MINAS_INICIALES){
+			Random aleatorio = new Random();
+			int i = aleatorio.nextInt(LADO_TABLERO), j = aleatorio.nextInt(LADO_TABLERO);
+			if (tablero[i][j] == 0){
+				tablero[i][j] = MINA;
+				numeroMinas++;
+			}
+		}
 		
 		//Al final del m�todo hay que guardar el n�mero de minas para las casillas que no son mina:
 		for (int i = 0; i < tablero.length; i++) {
@@ -58,7 +73,28 @@ public class ControlJuego {
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int i, int j){
-		return 0;
+		int contadorMinasAlrededor = 0;
+		int iInicial = Math.max(0, i - 1); 
+		int iFinal = Math.min(LADO_TABLERO - 1, i + 1); 
+		int jInicial = Math.max(0, j - 1); 
+		int jFinal = Math.min(LADO_TABLERO - 1, j + 1);
+
+		if (iInicial < 0){
+			iInicial = 0;
+		}
+		if (jInicial < 0){
+			jInicial = 0;
+		}
+		 
+		for (int k = iInicial; iInicial <= iFinal; k++) {
+			for (int l = jInicial; j <= jFinal; l++) {
+				if (tablero[k][l] == MINA){
+					contadorMinasAlrededor++;
+				}
+			}
+		}
+		
+		return contadorMinasAlrededor;
 	}
 	
 	/**

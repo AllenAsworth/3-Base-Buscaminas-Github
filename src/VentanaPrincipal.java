@@ -202,7 +202,9 @@ public class VentanaPrincipal {
 		//IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS COMPONENTES.
 		ventana.setVisible(true);
 		inicializarComponentes();	
-		inicializarListeners();		
+		inicializarListeners();	
+		ControlJuego controlJuego = new ControlJuego();
+		controlJuego.depurarTablero();	
 	}
 
 
