@@ -213,7 +213,7 @@ public class VentanaPrincipal {
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		int punt = juego.;
+		pantallaPuntuacion.setText(""+juego.getPuntuacion());
 		//TODO
 	}
 	
