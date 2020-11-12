@@ -11,10 +11,14 @@ import java.awt.event.ActionListener;
  */
 public class ActionBoton implements ActionListener{
 
-	
+	private VentanaPrincipal ventana;
+	private int i;
+	private int j;
 
-	public ActionBoton() {
-		//TODO
+	public ActionBoton(VentanaPrincipal ventana, int i, int j) {
+		this.ventana = ventana;
+		this.i = i;
+		this.j = j;
 	}
 	
 	/**
@@ -22,7 +26,14 @@ public class ActionBoton implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO
-	}
 
+		if (ventana.juego.abrirCasilla(i, j)){
+			ventana.mostrarNumMinasAlrededor(i, j);
+			ventana.actualizarPuntuacion();
+		}
+		else{
+			ventana.mostrarFinJuego(true);
+		}
+		ventana.refrescarPantalla();
+	}
 }
