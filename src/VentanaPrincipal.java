@@ -154,7 +154,12 @@ public class VentanaPrincipal {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
+				for (int i = 0; i < botonesJuego.length; i++) {
+					for (int j = 0; j < botonesJuego.length; j++) {
+						botonesJuego[i][j].setEnabled(true);
+					}
+				}
 			}
 		});
 	}
