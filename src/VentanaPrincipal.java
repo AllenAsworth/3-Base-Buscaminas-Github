@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 
 /**
  * Ventana principal del Buscaminas
- * @author {Rellenar por el alumno}
+ * @author Iván Gil Martín
  */
 public class VentanaPrincipal {
 
@@ -149,6 +149,14 @@ public class VentanaPrincipal {
 				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
 			}
 		}
+
+		botonEmpezar.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 	
 	
@@ -176,25 +184,25 @@ public class VentanaPrincipal {
 		int numeroMinas = juego.getMinasAlrededor(i, j);
 		String numeroMarcador = Integer.toString(numeroMinas);
 		JLabel marcador = new JLabel(numeroMarcador);
+		marcador.setHorizontalAlignment(SwingConstants.CENTER);
 
 		switch (numeroMinas){
 			case 0:
-				marcador.setForeground(Color.BLACK);
+				marcador.setForeground(correspondenciaColores[numeroMinas]);
 				break;
 			case 1:
-				marcador.setForeground(Color.CYAN);
+				marcador.setForeground(correspondenciaColores[numeroMinas]);
 				break;
 			case 2:
-				marcador.setForeground(Color.GREEN);
+				marcador.setForeground(correspondenciaColores[numeroMinas]);
 				break;
 			case 3:
-				marcador.setForeground(Color.ORANGE);
+				marcador.setForeground(correspondenciaColores[numeroMinas]);
 				break;
 			default:
-				marcador.setForeground(Color.RED);
+				marcador.setForeground(correspondenciaColores[numeroMinas]);
 				break;
 		}
-		marcador.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panelesJuego[i][j].add(marcador);
 	}
@@ -206,6 +214,23 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
+		String cadena = "";
+		if (porExplosion){
+			cadena += "Has perdido. Ha explotado una mina.\n";
+			cadena += "Puntuacion: "+juego.getPuntuacion();
+			JOptionPane.showMessageDialog(ventana, cadena);
+		}
+		else{
+			cadena += "Has ganado. Has mostrado todas las casillas sin minas.\n";
+			cadena += "Puntuacion: "+juego.getPuntuacion();
+			JOptionPane.showMessageDialog(ventana, cadena);
+		}
+
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego.length; j++) {
+				botonesJuego[i][j].setEnabled(false);
+			}
+		}
 		//TODO
 	}
 

@@ -32,8 +32,14 @@ public class ActionBoton implements ActionListener{
 			ventana.actualizarPuntuacion();
 		}
 		else{
-			ventana.mostrarFinJuego(true);
+			if (ventana.juego.getPuntuacion() == (ventana.juego.LADO_TABLERO * ventana.juego.LADO_TABLERO) - ventana.juego.MINAS_INICIALES){
+				ventana.mostrarFinJuego(false);
+			}
+			else{
+				ventana.mostrarFinJuego(true);
+			}
 		}
+
 		ventana.refrescarPantalla();
 	}
 }
