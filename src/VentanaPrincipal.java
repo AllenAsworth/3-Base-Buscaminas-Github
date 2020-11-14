@@ -155,11 +155,21 @@ public class VentanaPrincipal {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				for (int i = 0; i < botonesJuego.length; i++) {
-					for (int j = 0; j < botonesJuego.length; j++) {
+				for (int i = 0; i < panelesJuego.length; i++) {
+					for (int j = 0; j < panelesJuego.length; j++) {
+						panelesJuego[i][j].removeAll();
+					}
+				}
+
+				for (int i = 0; i < panelesJuego.length; i++) {
+					for (int j = 0; j < panelesJuego.length; j++) {
+						panelesJuego[i][j].add(botonesJuego[i][j]);
 						botonesJuego[i][j].setEnabled(true);
 					}
 				}
+
+				juego.inicializarPartida();
+				actualizarPuntuacion();
 			}
 		});
 	}
