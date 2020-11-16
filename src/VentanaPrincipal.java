@@ -15,7 +15,12 @@ import javax.swing.SwingConstants;
 
 /**
  * Ventana principal del Buscaminas
+ * {@link VentanaPrincipal#inicializar()}
+ * {@code VentanaPrincipal#inicializar()}
  * @author Iván Gil Martín
+ * @version 1.0 16/11/2020
+ * @since 0.9
+ * @see VentanaPrincipal#juego
  */
 public class VentanaPrincipal {
 
@@ -37,10 +42,8 @@ public class VentanaPrincipal {
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
 	
-	
 	//LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
-	
 	
 	//Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
@@ -65,7 +68,6 @@ public class VentanaPrincipal {
 		panelJuego = new JPanel();
 		panelJuego.setLayout(new GridLayout(10,10));
 		
-		
 		botonEmpezar = new JButton("Go!");
 		pantallaPuntuacion = new JTextField("0");
 		pantallaPuntuacion.setEditable(false);
@@ -76,7 +78,6 @@ public class VentanaPrincipal {
 		panelEmpezar.setBorder(BorderFactory.createTitledBorder("Empezar"));
 		panelPuntuacion.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelJuego.setBorder(BorderFactory.createTitledBorder("Juego"));
-		
 			
 		//Colocamos los componentes:
 		//AZUL
@@ -135,14 +136,12 @@ public class VentanaPrincipal {
 		//BotónEmpezar:
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
-		
 	}
 	
 	/**
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
-		//TODO
 		//Dar listeners para abrir cada casilla
 		for (int i = 0; i <= juego.LADO_TABLERO - 1; i++) {
 			for (int j = 0; j <= juego.LADO_TABLERO - 1; j++) {
@@ -174,7 +173,6 @@ public class VentanaPrincipal {
 		});
 	}
 	
-	
 	/**
 	 * Pinta en la pantalla el número de minas que hay alrededor de la celda
 	 * Saca el botón que haya en la celda determinada y añade un JLabel centrado y no editable con el número de minas alrededor.
@@ -188,12 +186,6 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
-		//Seleccionar el panel[i][j] correspondiente.
-		//Eliminar todos sus componentes: Buscar en Internet
-		//Añadimos un JLabel centrado y no editable con el numero de minas alrededor
-		//OJO: El numero de minas se saca de ControlJuego
-
 		panelesJuego[i][j].remove(botonesJuego[i][j]);
 
 		int numeroMinas = juego.getMinasAlrededor(i, j);
@@ -230,6 +222,7 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
 		String cadena = "";
+
 		if (porExplosion){
 			cadena += "Has perdido. Ha explotado una mina.\n";
 			cadena += "Puntuacion: "+juego.getPuntuacion();
@@ -246,7 +239,6 @@ public class VentanaPrincipal {
 				botonesJuego[i][j].setEnabled(false);
 			}
 		}
-		//TODO
 	}
 
 	/**
@@ -254,7 +246,6 @@ public class VentanaPrincipal {
 	 */
 	public void actualizarPuntuacion() {
 		pantallaPuntuacion.setText(""+juego.getPuntuacion());
-		//TODO
 	}
 	
 	/**
@@ -277,12 +268,8 @@ public class VentanaPrincipal {
 	 * Método para inicializar el programa
 	 */
 	public void inicializar(){
-		//IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS COMPONENTES.
 		ventana.setVisible(true);
 		inicializarComponentes();	
 		inicializarListeners();		
 	}
-
-
-
 }

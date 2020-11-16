@@ -7,10 +7,13 @@ import java.util.Random;
  * Si hay una mina en una posición guarda el número -1
  * Si no hay una mina, se guarda cuántas minas hay alrededor.
  * Almacena la puntuación de la partida
- * @author jesusredondogarcia
+ * @author Iván Gil Martín
  *
  */
 public class ControlJuego {
+	/**
+	 * Atributos finales y privados de la clase ControlJuego
+	 */
 	private final static int MINA = -1;
 	final int MINAS_INICIALES = 20;
 	final int LADO_TABLERO = 10;
@@ -18,34 +21,37 @@ public class ControlJuego {
 	private int [][] tablero;
 	private int puntuacion;
 	
-	
+	/**
+	 * Constructor por defecto de la clase, que crea un nuevo tablero y lo inicializa
+	 */
 	public ControlJuego() {
 		//Creamos el tablero:
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		
 		//Inicializamos una nueva partida
 		inicializarPartida();
-		depurarTablero();
 	}
 	
 	
-	/**Método para generar un nuevo tablero de partida:
+	/**
+	 * Método para generar un nuevo tablero de partida:
 	 * @pre: La estructura tablero debe existir. 
 	 * @post: Al final el tablero se habrá inicializado con tantas minas como marque la variable MINAS_INICIALES. 
-	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
+	 * El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
-		//TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
 		int numeroMinas = 0;
 		
 		puntuacion = 0;
 
+		//Inicializamos todas las posiciones del tablero a 0
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				tablero[i][j] = 0;
 			}
 		}
 
+		//Mientras que no esten todas las minas colocadas, seguira colocando minas aleatoriamente
 		while (numeroMinas != MINAS_INICIALES){
 			Random aleatorio = new Random();
 			int i = aleatorio.nextInt(LADO_TABLERO), j = aleatorio.nextInt(LADO_TABLERO);
@@ -55,7 +61,7 @@ public class ControlJuego {
 			}
 		}
 		
-		//Al final del m�todo hay que guardar el n�mero de minas para las casillas que no son mina:
+		//Al final del metodo hay que guardar el n�mero de minas para las casillas que no son mina:
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != MINA){
@@ -72,14 +78,15 @@ public class ControlJuego {
 	 * @param i: posición vertical de la casilla a rellenar
 	 * @param j: posición horizontal de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
-	 **/
+	 */
 	private int calculoMinasAdjuntas(int i, int j){
 		int contadorMinasAlrededor = 0;
 		int iInicial = Math.max(0, i - 1); 
 		int iFinal = Math.min(LADO_TABLERO - 1, i + 1); 
 		int jInicial = Math.max(0, j - 1); 
 		int jFinal = Math.min(LADO_TABLERO - 1, j + 1);
-		 
+		
+		//Esto controlará que no se salga del tablero para contar las minas y que pueda contar todas las que haya en su perimetro
 		for (int vertical = iInicial; vertical <= iFinal; vertical++) {
 			for (int horizontal = jInicial; horizontal <= jFinal; horizontal++) {
 				if (vertical >= 0 && vertical < LADO_TABLERO && horizontal >= 0 && horizontal < LADO_TABLERO - 1){
@@ -94,7 +101,7 @@ public class ControlJuego {
 	}
 	
 	/**
-	 * Método que nos permite 
+	 * Método que nos permite abrir una casilla del tablero. Devuelve verdadero si no hay mina en esa casilla y sumara 1 a la puntuacion, si hay mina, devolvera falso
 	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por el ControlJuego. Por lo tanto siempre sumaremos puntos
 	 * @param i: posición verticalmente de la casilla a abrir
 	 * @param j: posición horizontalmente de la casilla a abrir
@@ -110,12 +117,10 @@ public class ControlJuego {
 		}
 	}
 	
-	
-	
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas las casillas.
-	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
-	 **/
+	 * @return : Devuelve verdadero si se han abierto todas las celdas que no son minas.
+	 */
 	public boolean esFinJuego(){
 		if (puntuacion == (LADO_TABLERO * LADO_TABLERO) - MINAS_INICIALES){
 			return true;
@@ -124,7 +129,6 @@ public class ControlJuego {
 			return false;
 		}
 	}
-	
 	
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza para depurar
@@ -158,5 +162,4 @@ public class ControlJuego {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
-	
 }

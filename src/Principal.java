@@ -2,8 +2,7 @@ import java.awt.EventQueue;
 
 /**
  * Clase principal del Buscaminas
- * @author  Iván Gil Martín
- *
+ * @author Iván Gil Martín
  */
 public class Principal {
 
@@ -23,5 +22,4 @@ public class Principal {
 			}
 		});
 	}
-
 }
