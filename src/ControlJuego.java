@@ -32,7 +32,6 @@ public class ControlJuego {
 		inicializarPartida();
 	}
 	
-	
 	/**
 	 * Método para generar un nuevo tablero de partida:
 	 * @pre: La estructura tablero debe existir. 
