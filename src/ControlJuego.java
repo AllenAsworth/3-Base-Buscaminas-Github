@@ -88,7 +88,7 @@ public class ControlJuego {
 		//Esto controlará que no se salga del tablero para contar las minas y que pueda contar todas las que haya en su perimetro
 		for (int vertical = iInicial; vertical <= iFinal; vertical++) {
 			for (int horizontal = jInicial; horizontal <= jFinal; horizontal++) {
-				if (vertical >= 0 && vertical < LADO_TABLERO && horizontal >= 0 && horizontal < LADO_TABLERO - 1){
+				if (vertical >= 0 && vertical < LADO_TABLERO && horizontal >= 0 && horizontal < LADO_TABLERO){
 					if (tablero[vertical][horizontal] == MINA){
 						contadorMinasAlrededor++;
 					}
